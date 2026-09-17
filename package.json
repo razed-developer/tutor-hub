@@ -1,7 +1,7 @@
 {
   "name": "tutor-hub",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,11 +10,8 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "katex": "^0.16.11",
-    "perfect-freehand": "^1.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-katex": "^3.0.1",
     "vite": "^6.0.5"
   },
   "devDependencies": {
