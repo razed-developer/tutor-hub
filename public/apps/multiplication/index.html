@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multiplication Explorer · Tutor Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="shape shape-a"></div><div class="shape shape-b"></div><div class="shape shape-c"></div>
+  <main class="app">
+    <header class="hero">
+      <a class="back" href="/">← Tutor Hub</a>
+      <div><p class="eyebrow">EXPLORE THE PATTERNS</p><h1>MULTIPLICATION EXPLORER</h1></div>
+      <button id="drawerButton" class="explore-button" type="button" aria-expanded="false" aria-controls="drawer">Explore ▸</button>
+    </header>
+
+    <section class="equation-panel" aria-label="Equation explorer">
+      <div class="equation-row">
+        <label for="equation">Try an equation</label>
+        <input id="equation" inputmode="text" autocomplete="off" spellcheck="false" placeholder="5×4=   or   =20   or   20÷5=" aria-describedby="equationHint" />
+        <button id="keyboardButton" class="key-toggle" type="button" aria-expanded="false">⌨ Keypad</button>
+        <button id="clearEquation" class="clear-button" type="button">Clear</button>
+      </div>
+      <div id="equationHint" class="hint">Try 5×4=, =20, 20÷5=, or an equation with ?</div>
+      <div id="result" class="result" aria-live="polite">Hover or tap a square to explore the table.</div>
+      <div id="keypad" class="keypad" hidden></div>
+    </section>
+
+    <div class="workspace">
+      <section class="table-card">
+        <div class="table-scroll"><table id="multiplication-table" aria-label="Multiplication table"></table></div>
+      </section>
+
+      <aside id="drawer" class="drawer" aria-label="Explore table patterns" aria-hidden="true">
+        <div class="drawer-head"><div><p>TABLE TOOLS</p><h2>Explore</h2></div><button id="closeDrawer" type="button" aria-label="Close explore drawer">×</button></div>
+        <div class="drawer-section">
+          <h3>Patterns</h3>
+          <label class="switch"><input id="primesToggle" type="checkbox"><span></span><b>Prime numbers</b></label>
+          <label class="switch"><input id="squaresToggle" type="checkbox"><span></span><b>Square numbers</b></label>
+          <label class="switch"><input id="symmetryToggle" type="checkbox"><span></span><b>Symmetry</b></label>
+          <label class="switch"><input id="parityToggle" type="checkbox"><span></span><b>Even / odd</b></label>
+        </div>
+        <div class="drawer-section">
+          <h3>Explore a table</h3>
+          <label for="multipleSelect">Multiples / skip-counting</label>
+          <select id="multipleSelect"><option value="">Choose a number…</option></select>
+        </div>
+        <div class="drawer-section">
+          <h3>Practice</h3>
+          <label class="switch"><input id="practiceToggle" type="checkbox"><span></span><b>Hide answers</b></label>
+          <label for="rangeSelect">Table size</label>
+          <select id="rangeSelect"><option value="5">1–5</option><option value="10">1–10</option><option value="12" selected>1–12</option><option value="20">1–20</option></select>
+        </div>
+        <button id="resetTools" class="reset-tools" type="button">Reset table tools</button>
+      </aside>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
