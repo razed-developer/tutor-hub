@@ -1,75 +1,59 @@
-# Tutor Hub Worksheet Studio
+# Tutor Hub
 
-A React + Vite + TypeScript foundation for generating printable and digitally writable math worksheets.
+Tutor Hub is a React + Vite + TypeScript **Games and Tools portal** deployed on Cloudflare Pages. It displays a configurable catalogue of educational games and tools, including independently built applications packaged under `public/apps/`.
 
-## Current features
+**Live site:** https://tutor-razed-hub.pages.dev/
 
-- Cloudflare Pages-compatible static build
-- Fraction and exponent examples
-- Grade metadata
-- Difficulty levels 1–5
-- Four-option hint mode with one correct choice
-- Simple answer key containing final answers only
-- Detailed, step-by-step worked solutions
-- Print and Save as PDF
-- Digital pen
-- Stroke eraser
-- Straight-line tool
-- Hold Shift while drawing to create a straight line
-- Insertable coordinate grid
-- Clear digital writing
+## What is implemented
+
+- Public Games and Tools catalogue with image cards, display order, and enable/disable flags
+- `/admin` catalogue editor for adding, editing, deleting, and uploading card images
+- Cloudflare Pages Functions for catalogue and image APIs
+- Cloudflare D1-backed catalogue schema (`schema.sql`)
+- Standalone packaged applications in `public/apps/`
+
+**Important:** The original README described a worksheet studio with printable math worksheets and pen annotations. That description is outdated relative to the current source code. Do not assume those worksheet features are available in this version.
+
+## Start here
+
+- **[Operations guide](docs/OPERATIONS.md):** architecture, adding links and packaged apps, updating them, Cloudflare deployment, testing, and security
+- **[Application inventory](docs/app-inventory.md):** existing bundled apps and upstream-version tracking
+- **[Packaged app rules](public/apps/README.md):** app directory structure and base-path requirements
+- **[Deployment/branding contract](docs/deployment-branding-contract.md):** proposed cross-deployment architecture; not all described features are implemented
 
 ## Local development
 
 ```bash
 npm install
 npm run dev
-```
-
-## Production build
-
-```bash
 npm run build
 ```
 
-Cloudflare Pages settings:
+The current package also provides `npm run install:sphynx -- <metadata.json> [build-directory]` and `npm run install:creative -- <dist-directory>`. See the operations guide before replacing deployed assets.
 
-- Framework preset: `Vite`
-- Build command: `npm run build`
-- Build output directory: `dist`
-- Root directory: `/`
+## Cloudflare Pages
 
-## Question structure
+Repository build settings previously documented for this project:
 
-Questions are stored in `src/data/questions.ts`.
+| Setting | Value |
+| --- | --- |
+| Framework | Vite |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Root directory | `/` |
 
-Each question includes:
+The live deployment additionally relies on Cloudflare Pages Functions and configured bindings such as D1 and image storage. Confirm their settings in Cloudflare before publishing. Changes merged to the connected production branch may trigger an automatic deployment.
 
-- grade
-- difficulty
-- topic
-- skill
-- curriculum tags
-- prompt
-- final answer
-- four hint choices
-- correct choice ID
-- detailed solution steps
+**Security:** The repository's admin catalogue handler does not independently verify authentication. Ensure Cloudflare Access or an equivalent policy protects the admin page and **all** admin API endpoints before exposing them publicly.
 
-## Publishing new questions with ChatGPT and GitHub
+## Adding and updating tools
 
-Ask ChatGPT to add questions directly to this repository. For example:
+External websites can be linked from the `/admin` catalogue. For independently hosted applications, build them for `/apps/<slug>/`, package only their compiled output under `public/apps/<slug>/`, test a Pages preview, and then add the catalogue card. Keep source projects and their attribution independent.
 
-> Add 20 Grade 7 fraction-division questions to razed-developer/tutor-hub. Use difficulty levels 1–3, four plausible answer choices, final answers, and detailed worked solutions.
+See [the full procedure](docs/OPERATIONS.md).
 
-After the commit reaches the branch connected to Cloudflare Pages, Cloudflare will rebuild and publish the site.
+## Planned: teacher.dev STEM Figures
 
-## Important next steps
+The goal is to make the complete [STEM Figures](https://github.com/teacherdotdev/stem-figures) collection discoverable from the Tools catalogue and, after compatibility checks, host its seven upstream apps independently. Preserve teacher.dev credit and license notices. Track upstream commits rather than silently updating deployed copies.
 
-- Add undo and redo for annotations
-- Save editable worksheet sessions to local storage
-- Export annotations with the worksheet as PNG or PDF
-- Add movable/resizable graph objects
-- Add student and tutor accounts
-- Split question banks into topic-specific JSON files
-- Add automated validation to ensure exactly one hint choice matches each final answer
+No STEM Figures apps are deployed by this documentation-only change.
