@@ -40,7 +40,10 @@ A temporary local test harness substitutes `@sveltejs/adapter-static` with `/app
 - Math: static build succeeded, with 378 base-path warnings.
 - Biology: static build succeeded, with 125 base-path warnings.
 - Chemistry: static build succeeded, with 291 base-path warnings.
-- Other apps: batch still underway when these findings were recorded; verify separately.
+- Physics: static build succeeded, with 165 base-path warnings.
+- Engineering: static build succeeded, with 7 base-path warnings.
+- Economics: static build succeeded, with 86 base-path warnings.
+- All seven experimental static builds have now succeeded, but none is production-ready until absolute URLs are fixed.
 - The original Vercel adapter build fails under local Node 26 because its default runtime support is Node 20, 22, or 24.
 
 A successful experimental build is **not** proof of working navigation. Fix absolute URLs and rerun with strict prerender errors before packaging or deploying.
