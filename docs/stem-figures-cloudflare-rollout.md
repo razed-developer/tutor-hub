@@ -40,7 +40,7 @@ The upstream SvelteKit apps currently use the Vercel adapter. Do not assume `npm
 
 Create a Pages project for each output, configure the root-hosted static build, and deploy its generated files. Verify the actual assigned `*.pages.dev` address rather than guessing it. If deploying with Wrangler, authenticate with a Cloudflare account authorized for the intended projects; never commit API tokens.
 
-For each project, verify the homepage, generator routes, deep-link refresh, favicon and example images, interactive editors, image export/download, mobile layout, and teacher.dev attribution. Only then add a Tools entry via Tutor Hub's existing admin catalogue.
+For each project, verify the homepage, generator routes, deep-link refresh, favicon and example images, interactive editors, image export/download, mobile layout, and teacher.dev attribution. Run `node scripts/verify-stem-figures-build.mjs /path/to/stem-figures math` (substitute each app) as a basic artifact smoke test. This does not replace browser testing. Only then add a Tools entry via Tutor Hub's existing admin catalogue.
 
 ## Updating later
 
@@ -55,3 +55,11 @@ The Tutor Hub deployment itself need not change when only the independently host
 ## Status
 
 **All seven root-hosted strict adapter-static builds passed on 2026-11-19** in the approved Sphynx workspace: math, biology, chemistry, physics, engineering, economics, and stem. The experimental build script restored each original SvelteKit config afterward. This is build verification only; browser functionality and Cloudflare preview deployments remain outstanding. **No Cloudflare projects or catalogue entries have been created by this documentation change.** Do not present proposed project names as live links.
+
+## Routing discovery
+
+All seven outputs include `index.html`, `200.html`, and bundled `_app` assets. Many generator URLs (for example `/coordinate-grid`) **do not have a corresponding prerendered HTML file**. They depend on SvelteKit's client-side routing and the `200.html` SPA fallback. The Cloudflare preview must verify that directly loading and refreshing these URLs serves the fallback correctly; a homepage-only check is insufficient. Some example and informational pages are prerendered to `*.html`.
+
+Static build sizes from the pinned local upstream commit `3bb4319`: math ~31 MB, biology ~15 MB, chemistry ~24 MB, physics ~13 MB, engineering ~1.9 MB, economics ~8.7 MB, STEM landing ~208 KB. These are local artifact sizes, not Cloudflare storage or bandwidth estimates.
+
+**Cross-site links:** The upstream sites refer to each other through their existing public domains. Until those links are intentionally reconfigured, navigating between subjects may leave the independently hosted copies. The Tutor Hub catalogue can link directly to each independent deployment; verify this behavior with students before launch.
