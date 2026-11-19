@@ -53,3 +53,10 @@ A successful experimental build is **not** proof of working navigation. Fix abso
 A second local integration harness applies **temporary, reversible** path changes before building. It preserves original upstream source files by restoring them after each build. The STEM landing app now passes a **strict** adapter-static build without `handleHttpError: 'warn'`. The necessary changes included favicon URL handling in `app.html`, root-relative links in Svelte components, and subject icon URLs stored in `src/lib/sites.ts`.
 
 The remaining six strict builds were started separately. Do not assume they pass until their logs have been checked. The successful strict build is not a browser navigation test, accessibility review, or deployed Cloudflare preview.
+
+### Strict-build batch outcome
+
+- **Passed:** STEM landing, Engineering.
+- **Blocked by root-relative URLs in data/config:** Math (`/coordinate-grid`), Biology (`/population-growth`), Chemistry (`/volume-reading`), Physics (`/free-body-diagram`), Economics (`/supply-demand`).
+- This shows simple Svelte markup replacement is insufficient: root URLs also originate from TypeScript data such as `src/lib/site/news.ts`. Next iteration should use explicit typed URL helpers or a carefully reviewed source transformation, not disable strict prerender checks.
+- After the batch, upstream tracked files were restored; generated `apps/*/build` directories remain untracked local test artifacts. The pre-existing `.npmrc` modification was preserved.
