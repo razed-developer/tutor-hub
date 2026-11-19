@@ -47,3 +47,9 @@ A temporary local test harness substitutes `@sveltejs/adapter-static` with `/app
 - The original Vercel adapter build fails under local Node 26 because its default runtime support is Node 20, 22, or 24.
 
 A successful experimental build is **not** proof of working navigation. Fix absolute URLs and rerun with strict prerender errors before packaging or deploying.
+
+## Strict build follow-up
+
+A second local integration harness applies **temporary, reversible** path changes before building. It preserves original upstream source files by restoring them after each build. The STEM landing app now passes a **strict** adapter-static build without `handleHttpError: 'warn'`. The necessary changes included favicon URL handling in `app.html`, root-relative links in Svelte components, and subject icon URLs stored in `src/lib/sites.ts`.
+
+The remaining six strict builds were started separately. Do not assume they pass until their logs have been checked. The successful strict build is not a browser navigation test, accessibility review, or deployed Cloudflare preview.
