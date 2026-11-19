@@ -26,7 +26,7 @@ Upstream: https://github.com/teacherdotdev/stem-figures
 
 - Clone or fetch upstream at a recorded, pinned commit.
 - Install dependencies using the repository's lockfile.
-- Build each app using `@sveltejs/adapter-static` with its default root base path (no `paths.base`).
+- Build each app using `@sveltejs/adapter-static` with its default root base path (no `paths.base`). Use `node scripts/build-stem-figures.mjs /path/to/stem-figures math` from the Tutor Hub repository, substituting each app name. The script expects the upstream checkout's dependencies, including the static adapter, to be installed.
 - Use strict prerender error handling. A successful build with `handleHttpError: 'warn'` is **not sufficient**.
 - Keep each app's build directory as that Pages project's output. Do **not** combine multiple root-hosted outputs into Tutor Hub's `public/apps`.
 - Preserve teacher.dev attribution, Apache-2.0 license and notices. Verify any app-specific external resources and terms.
@@ -54,4 +54,4 @@ The Tutor Hub deployment itself need not change when only the independently host
 
 ## Status
 
-Root-hosted strict build compatibility is being validated. **No Cloudflare projects or catalogue entries have been created by this documentation change.** Do not present proposed project names as live links.
+**All seven root-hosted strict adapter-static builds passed on 2026-11-19** in the approved Sphynx workspace: math, biology, chemistry, physics, engineering, economics, and stem. The experimental build script restored each original SvelteKit config afterward. This is build verification only; browser functionality and Cloudflare preview deployments remain outstanding. **No Cloudflare projects or catalogue entries have been created by this documentation change.** Do not present proposed project names as live links.
