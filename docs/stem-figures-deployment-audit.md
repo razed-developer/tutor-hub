@@ -31,3 +31,16 @@ All seven root `src/routes/+page.ts` files set `export const prerender = true`. 
 - [ ] Student-facing catalogue entries
 
 No live deployment has been changed.
+
+## Experimental static build results (2026-11-19)
+
+A temporary local test harness substitutes `@sveltejs/adapter-static` with `/apps/stem-<name>` as the base path, then restores each upstream configuration. The experiment sets `handleHttpError: 'warn'` to diagnose bad paths. This setting must **not** be used in production.
+
+- STEM landing: static build succeeded, but its absolute favicon URL is incompatible with nested hosting.
+- Math: static build succeeded, with 378 base-path warnings.
+- Biology: static build succeeded, with 125 base-path warnings.
+- Chemistry: static build succeeded, with 291 base-path warnings.
+- Other apps: batch still underway when these findings were recorded; verify separately.
+- The original Vercel adapter build fails under local Node 26 because its default runtime support is Node 20, 22, or 24.
+
+A successful experimental build is **not** proof of working navigation. Fix absolute URLs and rerun with strict prerender errors before packaging or deploying.
