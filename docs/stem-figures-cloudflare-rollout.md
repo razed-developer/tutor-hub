@@ -63,3 +63,15 @@ All seven outputs include `index.html`, `200.html`, and bundled `_app` assets. M
 Static build sizes from the pinned local upstream commit `3bb4319`: math ~31 MB, biology ~15 MB, chemistry ~24 MB, physics ~13 MB, engineering ~1.9 MB, economics ~8.7 MB, STEM landing ~208 KB. These are local artifact sizes, not Cloudflare storage or bandwidth estimates.
 
 **Cross-site links:** The upstream sites refer to each other through their existing public domains. Until those links are intentionally reconfigured, navigating between subjects may leave the independently hosted copies. The Tutor Hub catalogue can link directly to each independent deployment; verify this behavior with students before launch.
+
+## Local HTTP smoke test (Math)
+
+With the built Math app served through Vite preview on localhost: 
+
+- `/` → HTTP 200, HTML
+- `/coordinate-grid` → HTTP 200, HTML (client-side editor route)
+- `/favicon.svg` → HTTP 200, SVG
+- `/_app/version.json` → HTTP 200, JSON
+- `/examples/coordinate-grid` → HTTP 404; this was **not a valid expected route**. Prerendered example URLs instead use paths such as `/coordinate-grid/examples/first-quadrant-graph-paper-with-axis-titles`.
+
+The local preview process was stopped after testing. This does not verify Cloudflare Pages behavior or interactive editor functionality. Before deployment, test an actual example URL and direct-route refresh on Cloudflare preview.
